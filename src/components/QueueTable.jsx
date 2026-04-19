@@ -72,15 +72,19 @@ export default function QueueTable({ prints, isAdmin, onDelete, onMarkDone, onRe
           <table className="w-full text-sm">
             {thead}
             <tbody className="bg-white">
-              {prints.map(print => (
-                <SortableRow
-                  key={print.id}
-                  print={print}
-                  isAdmin={isAdmin}
-                  onDelete={onDelete}
-                  onMarkDone={onMarkDone}
-                />
-              ))}
+              {prints.map((print, idx) => {
+                const nextIdx = prints.findIndex(p => p.status === 'queued')
+                return (
+                  <SortableRow
+                    key={print.id}
+                    print={print}
+                    isAdmin={isAdmin}
+                    onDelete={onDelete}
+                    onMarkDone={onMarkDone}
+                    isNext={idx === nextIdx}
+                  />
+                )
+              })}
             </tbody>
           </table>
         </div>

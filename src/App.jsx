@@ -208,6 +208,24 @@ export default function App() {
           </div>
         </div>
 
+        {/* Hero stats */}
+        {!loading && !error && (
+          <div className="grid grid-cols-2 gap-4 mb-8">
+            <div className="bg-white rounded-2xl border border-gray-200 p-5 text-center shadow-sm">
+              <p className="text-3xl font-bold text-blue-600">
+                {prints.filter(p => p.status !== 'completed').length}
+              </p>
+              <p className="text-sm text-gray-500 mt-1 font-medium">in queue</p>
+            </div>
+            <div className="bg-white rounded-2xl border border-gray-200 p-5 text-center shadow-sm">
+              <p className="text-3xl font-bold text-green-600">
+                {prints.filter(p => p.status === 'completed').length}
+              </p>
+              <p className="text-sm text-gray-500 mt-1 font-medium">completed</p>
+            </div>
+          </div>
+        )}
+
         {/* Error state */}
         {error && (
           <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl text-sm text-red-700">

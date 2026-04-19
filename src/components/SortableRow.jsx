@@ -37,7 +37,7 @@ function timeInQueue(createdAt, finishedAt) {
   return `${d}d ${m}m ${s}s`
 }
 
-export default function SortableRow({ print, isAdmin, onDelete, onMarkDone }) {
+export default function SortableRow({ print, isAdmin, onDelete, onMarkDone, isNext }) {
   const {
     attributes,
     listeners,
@@ -58,7 +58,13 @@ export default function SortableRow({ print, isAdmin, onDelete, onMarkDone }) {
     <tr
       ref={setNodeRef}
       style={style}
-      className={`border-b border-gray-100 transition-colors ${isDragging ? 'bg-blue-50 shadow-lg opacity-80' : 'hover:bg-gray-50/70'}`}
+      className={`border-b transition-colors ${
+        isDragging
+          ? 'bg-blue-50 shadow-lg opacity-80 border-gray-100'
+          : isNext
+          ? 'bg-amber-50/60 border-amber-100 hover:bg-amber-50 border-l-4 border-l-amber-400'
+          : 'border-gray-100 hover:bg-gray-50/70'
+      }`}
     >
       {isAdmin && (
         <td className="pl-3 pr-1 py-3 w-8">
@@ -92,9 +98,15 @@ export default function SortableRow({ print, isAdmin, onDelete, onMarkDone }) {
         {print.submitter_name}
       </td>
       <td className="px-4 py-3">
-        <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium capitalize ${statusStyle}`}>
-          {print.status}
-        </span>
+        {isNext && print.status === 'queued' ? (
+          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-700 ring-1 ring-amber-300">
+            Up Next
+          </span>
+        ) : (
+          <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium capitalize ${statusStyle}`}>
+            {print.status}
+          </span>
+        )}
       </td>
       <td className="px-4 py-3 text-xs text-gray-500 whitespace-nowrap">
         {formatDate(print.created_at)}
