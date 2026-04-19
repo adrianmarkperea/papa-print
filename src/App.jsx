@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { supabase } from './lib/supabase'
+import { sendSubmissionNotification } from './lib/resend'
 import AnnouncementBanner from './components/AnnouncementBanner'
 import QueueTable from './components/QueueTable'
 import CompletedTable from './components/CompletedTable'
@@ -69,6 +70,7 @@ export default function App() {
         ? [data, ...prev]
         : [...prev, data]
       )
+      sendSubmissionNotification(data)
     }
   }
 

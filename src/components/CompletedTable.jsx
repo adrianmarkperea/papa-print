@@ -58,6 +58,9 @@ export default function CompletedTable({ prints, isAdmin, onDelete }) {
                     >
                       {print.name}
                     </a>
+                    {print.comment && (
+                      <p className="text-xs text-gray-400 mt-0.5 font-normal">{print.comment}</p>
+                    )}
                   </td>
                   <td className="px-4 py-3 text-sm text-gray-600">
                     {print.submitter_name}

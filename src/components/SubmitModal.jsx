@@ -7,6 +7,7 @@ export default function SubmitModal({ onSubmit, onClose }) {
   const [printName, setPrintName] = useState('')
   const [link, setLink] = useState('')
   const [submitterName, setSubmitterName] = useState('')
+  const [comment, setComment] = useState('')
   const [errors, setErrors] = useState({})
   const [submitting, setSubmitting] = useState(false)
   const [mamaMode, setMamaMode] = useState(false)
@@ -43,6 +44,7 @@ export default function SubmitModal({ onSubmit, onClose }) {
       name: printName.trim(),
       link: link.trim(),
       submitter_name: submitterName.trim() || generateName(),
+      comment: comment.trim() || null,
       isMama: mamaMode && mamaPassword === MAMA_PASSWORD,
     })
     onClose()
@@ -97,6 +99,20 @@ export default function SubmitModal({ onSubmit, onClose }) {
               placeholder="Who are you?"
               readOnly={mamaMode}
               className={`w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:border-transparent ${mamaMode ? 'border-pink-300 bg-pink-50 text-pink-700 font-medium focus:ring-pink-400 cursor-not-allowed' : 'border-gray-300 focus:ring-blue-500'}`}
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Notes{' '}
+              <span className="text-gray-400 font-normal">(optional)</span>
+            </label>
+            <textarea
+              value={comment}
+              onChange={e => setComment(e.target.value)}
+              placeholder="Any special instructions or details..."
+              rows={2}
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
             />
           </div>
 
