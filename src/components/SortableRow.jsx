@@ -100,7 +100,7 @@ export default function SortableRow({ print, isAdmin, onDelete, onMarkDone, isNe
       <td className="px-4 py-3">
         {isNext && print.status === 'queued' ? (
           <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-700 ring-1 ring-amber-300">
-            Up Next
+            Next
           </span>
         ) : (
           <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium capitalize ${statusStyle}`}>
